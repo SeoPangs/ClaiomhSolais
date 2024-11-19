@@ -137,6 +137,31 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_COMMAND:
         {
+            static HWND hButton2 = NULL;
+            OutputDebugString(L"예시 디버깅 출력입니다.\n");
+            if (LOWORD(wParam) == BUTTON1_ID) 
+            {
+                if (hButton2 == NULL) 
+                {
+                    // 새로운 버튼 생성
+                    hButton2 = CreateWindow(
+                        L"BUTTON",
+                        L"새로운 버튼",
+                        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+                        50, 120, 200+ (rand()%5)*10, 50,
+                        hWnd,
+                        (HMENU)BUTTON2_ID,
+                        (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+                        NULL
+                    );
+                }
+                else
+                {
+                    //HWND 비활성화
+                    EnableWindow(hButton2, FALSE);
+                }
+            }
+
             int wmId = LOWORD(wParam);
             // 메뉴 선택을 구문 분석합니다:
             switch (wmId)
@@ -150,6 +175,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
+
+            
         }
         break;
     case WM_PAINT:
@@ -189,22 +216,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             EndDialog(hDlg, LOWORD(wParam));
             return (INT_PTR)TRUE;
         }
-        HWND hButton2 = NULL;
-        if (LOWORD(wParam) == BUTTON1_ID) {
-            if (hButton2 == NULL) {
-                // 새로운 버튼 생성
-                hButton2 = CreateWindow(
-                    L"BUTTON",
-                    L"새로운 버튼",
-                    WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-                    50, 120, 200, 50,
-                    hwnd,
-                    (HMENU)BUTTON2_ID,
-                    (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-                    NULL
-                );
-            }
-        }
+        
         break;
     }
     return (INT_PTR)FALSE;
