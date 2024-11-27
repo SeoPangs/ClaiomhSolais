@@ -1,4 +1,4 @@
-﻿// ClaiomhSolais.cpp : 애플리케이션에 대한 진입점을 정의합니다.
+// ClaiomhSolais.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
 #include "framework.h"
@@ -25,6 +25,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
+    MessageBoxW(NULL, L"게임 클리브 솔리스를 시작합니다.", L"클리브 솔리스", MB_OK);
+
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
